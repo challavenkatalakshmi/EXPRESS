@@ -1,0 +1,74 @@
+=>app.js:-
+
+var mongoose=require('mongoose');
+mongoose.connect("mongodb://localhost:27017/CRM")
+
+mongoose.connection.on("connected",()=>{
+  console.log('connected  to mongodb successfully')
+})
+var studentModel=require('./models/student.model')
+
+var studentRouter=require('./routes/students');
+app.use('/students',studentRouter);
+
+
+=>models/student.model.js:-
+
+const mongoose = require('mongoose')
+
+//creating schema..........
+
+var studentSchema=mongoose.Schema({
+    studentId:Number,
+    firstName:String,
+    lastName:String,
+    age:Number,
+    dob:String,
+    department:String
+  });
+  
+  //creating model for that schema....MODEL
+  
+  var studentModel = mongoose.model('Student',studentSchema)
+
+  module.exports=studentModel;
+
+=>routes/students.js:-
+
+var express = require('express');
+var router = express.Router();
+
+const mongoose=require('mongoose');
+const studentModel=require('../models/student.model');
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('students router');
+});
+
+router.get('/add', function(req, res, next) {
+    let newStudent = new studentModel ({
+        studentId:100,
+        firstName:'Venkata Lakshmi',
+        lastName:'Challa',
+        age:21,
+        dob:'31-03-2002',
+        department:'CSE'
+    })
+
+// Instead of using callback function, use promises
+    newStudent.save()
+    .then(savedStudent => {
+        res.status(200).send({ status: 200, message: 'User added successfully', studentObj: savedStudent });
+    })
+    .catch(err => {
+        res.status(500).send({ status: 500, message: 'Error occurred while saving user.' });
+    });
+
+
+    
+  });
+
+module.exports = router;
+
+

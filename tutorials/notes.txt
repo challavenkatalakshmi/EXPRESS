@@ -1,0 +1,98 @@
+npm install express
+npm init -y
+
+npm install nodemon
+nodemon server.js
+
+const express=require('express')
+const app=express()
+
+const products=require('./routes/products')
+
+app.get('/users',(req,res)=>{
+    res.send('hello')
+})
+
+app.use('/products',products)
+
+
+app.listen(5000,(req,res)=>{
+    console.log('running...')
+})
+
+____________________________________________________________________________
+
+#routes/products.js:-
+
+var express=require('express');
+var router=express.Router();
+
+//   /products/
+router.get('/',(req,res)=> {
+    res.send('Get request for Products...')
+})
+
+//   /products/get-product-details/
+
+router.get('/get-product-details',(req,res)=>{
+    res.send('Get request for product details...')
+})
+
+module.exports=router;
+
+_________________________________________________________________________________
+
+*****DYNAMIC ROUTES:-
+
+->we can pass any number of params
+->we collect the data using req.params.<variable>
+
+->can be in any order ex:-/products/:id/details/:state ...like this
+
+const express=require('express')
+const router=express.Router()
+
+router.get('/user-details/:id',(req,res)=>{
+    res.send('Get request for specific user '+req.params.id)
+})
+
+router.get('/search-by-location/:state/:city',(req,res)=>{
+    res.send('Get request for searching by location: state '+req.params.state+' city '+req.params.city)
+})
+
+//:key([0-9]{4})--only 0-9 numbers will be allowed and exactly the length of the integer should be 4.
+                    Only 4 digit number will be allowed
+
+router.get('/search/:key([0-9]{4})',(req,res)=>{
+    res.send('data captured is: '+req.params.key)
+})
+
+module.exports=router
+
+________________________________________________________________________
+
+EXPRESS GENERATOR:-
+-------------------
+using express generator we will be able to get proper Ideal structure.
+
+________________________________________________________________________
+
+***To connect to MONGODB :-
+
+#step1:-const mongoose=require('mongoose')
+
+#step2:-
+In properties.js:-
+-----------------
+
+module.exports={
+    DB_PORT:4300,
+    DB_URL:"http://localhost:27017/CRM"
+}
+
+#step3:-
+var dbURL=require('./properties').DB_URL
+
+
+
+

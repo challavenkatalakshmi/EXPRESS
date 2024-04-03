@@ -1,0 +1,95 @@
+npx express-generator
+npm i
+npm install mongoose --save
+
+______________________________________________________________________
+
+var mongoose=require('mongoose');
+
+//creating schema..........
+var studentSchema=mongoose.Schema({
+  studentId:Number,
+  firstName:String,
+  lastName:String,
+  age:Number,
+  dob:String,
+  department:String
+});
+
+//creating model for that schema....MODEL
+
+var Student=mongoose.model('Student',studentSchema)
+
+______________________________________________________________________
+
+->routes
+    -students.js
+->app.js:-
+
+    const studentRouter=require('./routes/students')
+
+    app.use('/students',studentRouter)
+
+->students.js
+
+    const mongoose=require('mongoose')
+    const studentModel=require('../models/student.model')
+
+____________________________________________________________________________________________________
+***********************
+// Instead of using callback function, use promises
+    newStudent.save()
+    .then(savedStudent => {
+        res.status(200).send({ status: 200, message: 'User added successfully', studentObj: savedStudent });
+    })
+    .catch(err => {
+        res.status(500).send({ status: 500, message: 'Error occurred while saving user.' });
+    });
+_____________________________________________________________________________________________
+
+step1:-Create Express generator app-->npx express-generator
+          also install node_modules-->npm i
+step2:-Install Mongoose Library    -->npm install mongoose --save
+
+step3:-Import Mongoose Library in our app.js and connect:
+                                   -->const mongoose=require('mongoose')
+                                   -->mongoose.connect("mongodb://localhost:27017/CRM")
+step4:-create a model folder
+        model
+            -student.model.js
+step5:-                    create Schema for your collection.
+step6:-                    create model for the same schema collection.
+                        EX:-
+                            var studentSchema=mongoose.Schema({
+                            studentId:Number,
+                            firstName:String,
+                            lastName:String,
+                            age:Number,
+                            dob:String,
+                            department:String
+                        });
+                        
+                        //creating model for that schema....MODEL
+                        
+                        var studentModel = mongoose.model('Student',studentSchema)
+
+                        module.exports=studentModel;
+
+step7:-Import the newly created Model into App.js
+
+step8:-create the mongodb connection
+
+step9:-create new object of Model
+
+step10:-Call "Save" method ->for Create/POST 
+
+-----------------------------------------------------------
+
+step11:- Refactor our code
+
+        -made the method - POST
+        -made the data dynamic in nature
+            -coming from request object
+            -->req.data.<variablename>
+
+step12:-using POSTMAN

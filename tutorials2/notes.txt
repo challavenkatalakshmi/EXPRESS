@@ -1,0 +1,49 @@
+->npx express-generator  (or) npm i express-generator
+->npm i (or) npm install 
+        To download all the required Modules called "node_modules"
+
+->npm i mongoose --save
+
+*bin->www--Server root directory.
+
+*public folders
+    -assets
+    -stylesheets
+    -scripts
+
+___________________________________________________________________________________
+
+->Types of TEMPLATE ENGINES:-
+
+    EJS-Embeded javascript template language
+    Pug
+    Jade
+    Moustache
+____________________________________________________________________________________
+
+MIDDLEWARE USECASES:-
+--------------------
+-To Trim the incoming data
+-Authentication TOken
+-security check
+-User access check
+
+
+________________________________________________________________________________________________
+CRON-JOBS:-batch-jobs.js
+
+//You want to reset some data at everyday night
+//you want to do backup
+//you want to dump  data into some other external systems.
+__________________________________________________________________________________
+
+SERVICES:-
+
+//services will serve to the related controllers..
+//ex:-
+//This will serve the both i.orders-controller and ii.orders-management-controller 
+________________________________________________________________________________________________
+
+INTEGRATIONS::-
+    -iCal.js:-TO incorporate with APPLE CALENDER
+    -oAuth.js
